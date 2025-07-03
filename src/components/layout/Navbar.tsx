@@ -17,7 +17,7 @@ export function Navbar() {
           <li>
             {" "}
             <Link
-              to="/"
+              to="/borrow-summary"
               className="flex items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white hover:bg-white/30 transition"
             >
               {" "}
