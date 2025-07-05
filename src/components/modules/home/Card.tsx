@@ -1,20 +1,29 @@
-function Card() {
+import { cn } from "@/lib/utils";
+import type { IBooks } from "@/types";
+
+function Card({ book }: IBooks) {
+  console.log(book);
   return (
     <div className="max-w-sm w-full bg-white rounded-xl shadow-md p-4 space-y-3 border">
-      <div className="flex justify-between items-start">
-        <h2 className="text-lg font-semibold">To Kill a Mockingbird</h2>
-        <span className="bg-green-100 text-green-800 text-sm px-2 py-0.5 rounded-full">
-          2 available
+      <div className="flex justify-between items-center">
+        <h2 className="text-lg font-semibold">{book.title}</h2>
+        <span
+          className={cn(
+            "text-xs font-medium px-2.5 py-1 rounded-full whitespace-nowrap",
+
+            book.available
+              ? " bg-green-100 text-green-800"
+              : "bg-red-100 text-red-800"
+          )}
+        >
+          {book.available ? ` ${book.copies} Available` : "Unavailable"}
         </span>
       </div>
 
-      <p className="text-sm text-gray-600">by Harper Lee</p>
-      <p className="text-sm text-gray-500">ISBN: 978-0446310789</p>
-      <p className="text-sm text-gray-500">Published: 1960</p>
-
-      <p className="text-sm text-gray-700">
-        A novel about racial inequality and moral growth in the American South.
-      </p>
+      <p className="text-sm text-gray-600">Author: {book.author}</p>
+      <p className="text-sm text-gray-500">genre: {book.genre}</p>
+      <p className="text-sm text-gray-500">ISBN: {book.isbn}</p>
+      <p className="text-sm text-gray-700">{book.description}</p>
 
       <hr className="my-2" />
 
@@ -27,7 +36,7 @@ function Card() {
             Delete
           </button>
         </div>
-        <button className="px-4 py-1.5 text-sm bg-indigo-700 text-white rounded hover:bg-indigo-700 transition">
+        <button className="px-4 py-1.5 text-sm bg-indigo-700 text-white rounded hover:bg-indigo-800 transition">
           Borrow
         </button>
       </div>
