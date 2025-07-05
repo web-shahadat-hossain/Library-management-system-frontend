@@ -1,8 +1,24 @@
 import { cn } from "@/lib/utils";
+import { useDeleteBookMutation } from "@/redux/api/bookApi";
 import type { IBooks } from "@/types";
+import { DeleteConfirm } from "./DeleteConfirm";
+import { toast } from "sonner";
+interface CardProps {
+  book: IBooks;
+}
+function Card({ book }: CardProps) {
+  const [deleteBook, { isError, isSuccess }] = useDeleteBookMutation();
 
-function Card({ book }: IBooks) {
-  console.log(book);
+  const deleteHandler = (id: string) => {
+    deleteBook(id);
+  };
+
+  if (isSuccess) {
+    toast.success("Book deleted successfully!!!");
+  }
+  if (isError) {
+    toast.error("Failed to delete book!!!");
+  }
   return (
     <div className="max-w-sm w-full bg-white rounded-xl shadow-md p-4 space-y-3 border">
       <div className="flex justify-between items-center">
@@ -32,9 +48,7 @@ function Card({ book }: IBooks) {
           <button className="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition">
             Edit
           </button>
-          <button className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200 transition">
-            Delete
-          </button>
+          <DeleteConfirm onConfirm={() => deleteHandler(book._id)} />
         </div>
         <button className="px-4 py-1.5 text-sm bg-indigo-700 text-white rounded hover:bg-indigo-800 transition">
           Borrow

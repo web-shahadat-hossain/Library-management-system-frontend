@@ -21,12 +21,35 @@ export const bookApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Book"],
     }),
-    getBooks: builder.query<IBooks[], void>({
-      query: () => "/books",
-      transformResponse: (response: { data: IBooks[] }) => response.data,
+    getBooks: builder.query<
+      {
+        data: IBooks[];
+        meta: {
+          total: number;
+          page: number;
+          limit: number;
+        };
+      },
+      { page: number; limit: number }
+    >({
+      query: ({ page, limit }) => `/books?page=${page}&limit=${limit}`,
       providesTags: ["Book"],
+    }),
+
+    deleteBook: builder.mutation<{ id: string }, string>({
+      query(id) {
+        return {
+          url: `books/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["Book"],
     }),
   }),
 });
 
-export const { useCreateBookMutation, useGetBooksQuery } = bookApi;
+export const {
+  useCreateBookMutation,
+  useGetBooksQuery,
+  useDeleteBookMutation,
+} = bookApi;
