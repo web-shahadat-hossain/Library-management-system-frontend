@@ -3,6 +3,7 @@ import { useDeleteBookMutation } from "@/redux/api/bookApi";
 import type { IBooks } from "@/types";
 import { DeleteConfirm } from "./DeleteConfirm";
 import { toast } from "sonner";
+import { Link } from "react-router";
 interface CardProps {
   book: IBooks;
 }
@@ -45,9 +46,12 @@ function Card({ book }: CardProps) {
 
       <div className="flex justify-between items-center">
         <div className="flex space-x-2">
-          <button className="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition">
+          <Link
+            to={`/edit-book/${book._id}`}
+            className="px-3 py-2 text-sm bg-blue-100 block text-blue-700 rounded hover:bg-blue-200 transition"
+          >
             Edit
-          </button>
+          </Link>
           <DeleteConfirm onConfirm={() => deleteHandler(book._id)} />
         </div>
         <button className="px-4 py-1.5 text-sm bg-indigo-700 text-white rounded hover:bg-indigo-800 transition">
