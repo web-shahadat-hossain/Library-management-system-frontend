@@ -14,3 +14,9 @@ export type IBooks = {
   copies: number;
   available: boolean;
 };
+
+export type IBorrow = {
+  book: string;
+  quantity: number;
+  dueDate: Date;
+};

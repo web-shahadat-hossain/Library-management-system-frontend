@@ -4,6 +4,7 @@ import type { IBooks } from "@/types";
 import { DeleteConfirm } from "./DeleteConfirm";
 import { toast } from "sonner";
 import { Link } from "react-router";
+import { AddBorrow } from "../AddBorrow";
 interface CardProps {
   book: IBooks;
 }
@@ -54,9 +55,7 @@ function Card({ book }: CardProps) {
           </Link>
           <DeleteConfirm onConfirm={() => deleteHandler(book._id)} />
         </div>
-        <button className="px-4 py-1.5 text-sm bg-indigo-700 text-white rounded hover:bg-indigo-800 transition">
-          Borrow
-        </button>
+        <AddBorrow id={book._id} />
       </div>
     </div>
   );

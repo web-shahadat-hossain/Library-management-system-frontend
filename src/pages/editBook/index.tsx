@@ -30,9 +30,9 @@ export default function EditBookPage() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [updateBook, { isSuccess, error, isLoading }] = useUpdateBookMutation();
+  const [updateBook, { isLoading }] = useUpdateBookMutation();
   const { data } = useGetSingleBookQuery(id as string);
-  console.log(error);
+
   const {
     register,
     handleSubmit,
