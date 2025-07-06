@@ -49,10 +49,8 @@ export function AddBorrow({ id }: { id: string }) {
   const navigate = useNavigate();
   const [createBorrow, { isSuccess, isError, error, isLoading }] =
     useCreateBorrowMutation();
-  console.log(error);
-  console.log(isSuccess);
+
   const onSubmitHandler: SubmitHandler<IBorrow> = (data) => {
-    console.log(data);
     data.quantity = Number(data.quantity);
     const apiData = { ...data, book: id };
     createBorrow(apiData);

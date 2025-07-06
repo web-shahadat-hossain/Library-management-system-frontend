@@ -19,13 +19,12 @@ function HomePage() {
   const [page, setPage] = useState(1);
   const limit = 12;
 
-  const { data, isLoading, isError, error } = useGetBooksQuery({
+  const { data, isLoading, isError } = useGetBooksQuery({
     page,
     limit,
   });
 
   if (isError) {
-    console.error("Error fetching books:", error);
     return (
       <div className="max-w-[1000px] mx-auto px-2 md:px-5 py-10 text-center text-red-500">
         Error loading books. Please try again later.
